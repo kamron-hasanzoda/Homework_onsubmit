@@ -1,5 +1,11 @@
 let form = document.forms.submit
 let inputs = form.querySelectorAll('input')
+let all = document.querySelector('#all')
+let need = document.querySelector('#Need')
+let successs = document.querySelector('#Success')
+let errorr = document.querySelector('#Error')
+let needdiv = document.querySelectorAll('#need input')
+let h4 = document.querySelectorAll('h4')
 
 let success = 0
 
@@ -11,9 +17,7 @@ form.onsubmit = (event) => {
     let error = needdiv.length
 
     inputs.forEach((input) => {
-        if (input.value.length === 0) {
-            success = 0
-        } else {
+        if (input.value.length >= 1) {
             success++
             successs.innerHTML = `Success: ${success}/ ${inputs.length}`
         }
@@ -62,13 +66,6 @@ function submit() {
         user[key] = value
     })
 }
-
-let all = document.querySelector('#all')
-let need = document.querySelector('#Need')
-let successs = document.querySelector('#Success')
-let errorr = document.querySelector('#Error')
-let needdiv = document.querySelectorAll('#need input')
-let h4 = document.querySelectorAll('h4')
 
 all.innerHTML = `All: ${inputs.length}`
 need.innerHTML = `Need: ${needdiv.length}`

@@ -7,6 +7,8 @@
     align-items: center;
     margin: 0 auto;
     gap: 30px;
+    transition: 1s ease;
+    transform: rotate(720deg);
 }
 
 .center {
@@ -55,18 +57,47 @@ button {
     margin-top: 5%;
 }
 
-.left, .right {
+.left,
+.right {
     width: 500px;
     height: 800px;
     align-items: center;
+    transition: 1s ease;
+    transform: rotate(720deg);
 }
 
 h4 {
     margin-top: 2px;
-    /* margin-bottom: 1px; */
     padding: 0px 10px;
 }
 
 .item {
     height: 120px;
+}
+
+body {
+    animation: rotate360 0.5s ease;
+}
+
+
+@keyframes rotate360 {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(-90deg);
+    }
+
+    50% {
+        transform: rotate(-180deg);
+    }
+
+    75% {
+        transform: rotate(-270deg);
+    }
+
+    100% {
+        transform: rotate(-360deg);
+    }
 }
