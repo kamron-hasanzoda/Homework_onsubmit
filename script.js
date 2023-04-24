@@ -1,60 +1,43 @@
 let form = document.forms.submit
 let inputs = form.querySelectorAll('input')
+let needInputs = document.querySelectorAll('#need input')
 let all = document.querySelector('#all')
 let need = document.querySelector('#Need')
-let successs = document.querySelector('#Success')
-let errorr = document.querySelector('#Error')
-let needdiv = document.querySelectorAll('#need input')
-let h4 = document.querySelectorAll('h4')
+let success = document.querySelector('#Success')
+let err = document.querySelector('#Error')
 
-let success = 0
+all.innerHTML = `All: ${inputs.length}`
+need.innerHTML = `Need: ${needInputs.length}`
 
 form.onsubmit = (event) => {
     event.preventDefault()
+    let errors = ''
+    let neeed = 0
 
-    let erors = ''
-    let success = 0
-    let error = needdiv.length
+    let error = inputs.length
+    let suc = inputs.length
 
-    inputs.forEach((input) => {
-        if (input.value.length >= 1) {
-            success++
-            successs.innerHTML = `Success: ${success}/ ${inputs.length}`
-        }
-    })
-
-    needdiv.forEach((input) => {
-        input.style.border = '5px solid blue'
-        h4.forEach(text => {
-            text.style.color = 'black'
-            text.innerHTML = ''
-        })
-        if (input.value.length === 0) {
-            input.style.border = '5px solid red'
-            erors += ` ${input.name}`
-            h4.forEach(text => {
-                if (input.value.length === 0) {
-                    text.innerHTML = 'Please enter your email adress'
-                    text.style.color = 'red'
-                } else {
-                    text.innerHTML = ''
-                }
-            })
+    inputs.forEach((inp) => {
+        if (inp.value.length === 0) {
+            suc--
+            success.innerHTML = `Success: ${suc}/${inputs.length}`
         } else {
             error--
-            errorr.innerHTML = `Error: ${error}/ ${needdiv.length}`
-            h4.forEach(text => {
-                text.innerHTML = ''
-                text.style.color = 'black'
-            })
+            err.innerHTML = `Error: ${error}/${inputs.length}`
         }
     })
 
-    if (!erors) {
-        submit()
-    } else {
-        alert(`У вас не заполнено поле${erors}`)
-    }
+    needInputs.forEach((inp) => {
+        inp.style.border = '2px solid red'
+        if (inp.value.length === 0) {
+            neeed++
+        } else {
+            inp.style.border = '2px solid green'
+            error++
+        }
+        need.innerHTML = `Need: ${neeed}/${needInputs.length}`
+    })
+    submit()
 }
 
 function submit() {
@@ -67,5 +50,9 @@ function submit() {
     })
 }
 
-all.innerHTML = `All: ${inputs.length}`
-need.innerHTML = `Need: ${needdiv.length}`
+inputs.forEach((inp) => {
+    if (inp.value.length === 0) {
+        success.innerHTML = `Success: ${inp.value.length}/${inputs.length}`
+        err.innerHTML = `Success: ${inputs.length}/${inputs.length}`
+    }
+})
